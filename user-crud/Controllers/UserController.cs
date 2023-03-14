@@ -33,5 +33,12 @@ namespace User.Controllers {
             UserModel createdUser = await _userRepository.CreateNewUser(user);
             return Ok(createdUser);
         }
+
+        [HttpPatch("{id}")]
+
+        public async Task<ActionResult<UserModel>> UpdateUser([FromBody]UserModel userInfo, int id) {
+            UserModel updatedUser = await _userRepository.UpdateUser(userInfo, id);
+            return Ok(updatedUser);
+        }
     }
 }
