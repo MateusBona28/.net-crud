@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using User.Models;
+using User.Repositories.Interfaces;
 
 namespace User.Controllers {
 
@@ -9,9 +10,28 @@ namespace User.Controllers {
 
     public class UserController : ControllerBase {
 
+        private readonly IUserRepository _userRepository;
+
+        public UserController(IUserRepository userRepository) {
+            _userRepository = userRepository;
+        }
+
         [HttpGet]
-        public ActionResult<List<UserModel>> GetUsers() {
-            return Ok();
+        public async Task<ActionResult<List<UserModel>>> GetUsers() {
+            List<UserModel> users = await _userRepository.GetAllUsers();
+            return Ok(users);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserModel>> GetUser(int id) {
+            UserModel user = await _userRepository.GetUserById(id);
+            return Ok(user);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<UserModel>> PostUser([FromBody]UserModel user) {
+            UserModel createdUser = await _userRepository.CreateNewUser(user);
+            return Ok(createdUser);
         }
     }
 }

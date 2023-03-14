@@ -4,9 +4,9 @@ namespace User.Repositories.Interfaces {
 
     public interface IUserRepository {
         Task<List<UserModel>> GetAllUsers();
-        Task<UserModel> GetUserById(string id);
+        Task<UserModel> GetUserById(int id);
         Task<UserModel> CreateNewUser(UserModel usuario);
-        Task<UserModel> UpdateUser(UserModel usuario, string id);
-        Task<bool> DeleteUser(string id);
+        Task<UserModel> UpdateUser(UserModel usuario, int id);
+        Task<bool> DeleteUser(int id);
     }
 }

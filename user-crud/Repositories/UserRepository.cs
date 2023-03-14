@@ -14,7 +14,7 @@ namespace User.Repositories {
         public async Task<List<UserModel>> GetAllUsers() {
             return await _dbContext.Users.ToListAsync();
         }
-        public async Task<UserModel> GetUserById(string id) {
+        public async Task<UserModel> GetUserById(int id) {
             return await _dbContext.Users.FirstOrDefaultAsync(user => user.Id == id);
         }
         public async Task<UserModel> CreateNewUser(UserModel user) {
@@ -23,7 +23,7 @@ namespace User.Repositories {
 
             return user;
         }
-        public async Task<UserModel> UpdateUser(UserModel user, string id) {
+        public async Task<UserModel> UpdateUser(UserModel user, int id) {
             UserModel userById = await GetUserById(id);
 
             if(userById == null)
@@ -39,7 +39,7 @@ namespace User.Repositories {
 
             return userById;
         }
-        public async Task<bool> DeleteUser(string id) {
+        public async Task<bool> DeleteUser(int id) {
 
             UserModel userById = await GetUserById(id);
 
