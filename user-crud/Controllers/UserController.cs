@@ -35,10 +35,15 @@ namespace User.Controllers {
         }
 
         [HttpPatch("{id}")]
-
         public async Task<ActionResult<UserModel>> UpdateUser([FromBody]UserModel userInfo, int id) {
             UserModel updatedUser = await _userRepository.UpdateUser(userInfo, id);
             return Ok(updatedUser);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<bool>> DeleteUser(int id) {
+            await _userRepository.DeleteUser(id);
+            return true;
         }
     }
 }
