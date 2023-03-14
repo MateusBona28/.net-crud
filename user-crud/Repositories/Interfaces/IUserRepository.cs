@@ -7,6 +7,6 @@ namespace User.Repositories.Interfaces {
         Task<UserModel> GetUserById(string id);
         Task<UserModel> CreateNewUser(UserModel usuario);
         Task<UserModel> UpdateUser(UserModel usuario, string id);
-        Task<UserModel> DeleteUser(string id);
+        Task<bool> DeleteUser(string id);
     }
 }
